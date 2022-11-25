@@ -1,0 +1,76 @@
+name: singlelb malicious user detection and default mitigation of high risk IPs
+on:
+  workflow_dispatch:
+    inputs:
+      msg: 
+        description: 'configs'
+        default: 'singlelb-detection-default-mitigation'  
+jobs:
+  deploy:
+  # This job deals with deployment of resources in F5 XC console and validate reachability of application
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+      - name: Deploy infra
+        run: |
+          cd http_malicious_user_detection_singlelb
+          terraform init
+          terraform plan -out=plan.out
+          terraform apply -auto-approve plan.out
+      - name: Upload tfstate file
+        uses: actions/upload-artifact@v3
+        with:
+          name: tfstate
+          path: http_malicious_user_detection_singlelb/terraform.tfstate
+      - name: Install python dependencies
+        run: |
+          python -m pip install requests
+          python -m pip install requests[socks]
+          python -m pip install requests[security]
+          python -m pip install tqdm
+          python -m pip install art
+      - name: Run validation script
+        run: python test_malicious_user.py secure False
+      - name: Validate Deployment  
+        run: |
+           if [ ${{ env.EXIT }} == "true" ]; then echo "application deployment unsuccessful or application not reachable"; exit 1;\
+           else echo "deployment is successful"; fi
+  test:
+  # This job deals with testing the deployed infra against malicious traffic and capture F5 XC malicious user logs
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+      - name: Install tor
+        run: sudo apt-get install -y tor
+      - name: Start tor service
+        run: sudo service tor start
+      - name: Install python dependencies
+        run: |
+          python -m pip install requests
+          python -m pip install requests[socks]
+          python -m pip install requests[security]
+          python -m pip install tqdm
+          python -m pip install art
+      - name: Run the test & Fetch XC logs
+        run: python test_malicious_user.py tor
+  destroy:
+  # This job deals with destroying the created resources in F5 XC console
+    if: ${{ always() }}
+    needs: [deploy, test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download tfsate file
+        uses: actions/download-artifact@v3
+        with:
+          name: tfstate
+      - name: Destroy infra
+        run: |
+          mv ./terraform.tfstate ./http_malicious_user_detection_singlelb/
+          cd http_malicious_user_detection_singlelb
+          terraform init
+          terraform plan -destroy 
+          terraform destroy -auto-approve
