@@ -52,7 +52,8 @@ In this scenario we are bringing up a https lb with an app type enabling detecti
 4.	Create a namespace in XC console, navigate to: `Home->Administration->Personal Management->My Namespaces->Add Namespace`or use `default` namespace and update the namespace name to the `variables.tf` file<br />
 5.	Make sure to add delegated domain in XC console and update the domain as well as tenant-name in `variables.tf` file. Please follow the steps for domain delegation mentioned in doc: [https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation](https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation) <br />
 6. 	Update the `test_malicious_user.py` file with APIToken (generated in step-1), tenant name, lb domain (delegated domain) and namespace <br />
-7.	Host an application to a server and update the public IP and port of the server in the `variables.tf` file <br />
+7.	Host an application to a server and update the public IP and port of the application server in `variables.tf` file.  <br />
+	`Note:` Make sure to double check the IP and port before adding it to variables.tf file as workflow will fail if incorrect entries are updated. <br />
 
 ```
 path[singlelb] -> http_malicious_user_detection_singlelb/variables.tf
