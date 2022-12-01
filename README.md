@@ -20,14 +20,14 @@ F5 Distributed Cloud Web Application and API Protection (F5 XC WAAP) offers an A
 [AI/ML detection of Malicious Users using F5 Distributed Cloud WAAP – Part III](https://community.f5.com/t5/technical-articles/ai-ml-detection-of-malicious-users-using-f5-distributed-cloud/ta-p/299014)<br /><br />
 The objective of this automation is to deploy the infrastructure and perform basic testing to demonstrate `malicious user detection and mitigation` feature of F5 XC using `Terraform`, `Python` and `GitHub Actions`.
 This repository consists of two workflows:<br />
-1.	Single LB malicious user detection and default mitigation of high-risk IPs <br />
-2.	Multi LB malicious user detection and custom mitigation of WAF security events <br />
+1.	Single LB malicious user detection and default mitigation of high-risk IPs. <br />
+2.	Multi LB malicious user detection and custom mitigation of WAF security events. <br />
 
 
 **Workflow Scenarios:**<br />
 ---
 **Single LB malicious user detection and default mitigation of high-risk IPs:**<br />
-In this scenario we are bringing up a http lb and configure it to detect and mitigate malicious user events using default mitigation rule. In second part of this demo, we will generate tor requests and fetch the logs from XC console to validate the detection and mitigation action <br /><br />
+In this scenario we are bringing up a http lb and configure it to detect and mitigate malicious user events using default mitigation rule. In second part of this demo, we will generate tor requests and fetch the logs from XC console to validate the detection and mitigation action. <br /><br />
 **Multi LB malicious user detection and custom mitigation of WAF security events:**<br />
 In this scenario we are bringing up a https lb with an app type enabling detection, app firewall in blocking mode and custom malicious user mitigation policy. In the second part of this scenario we are generating XSS attack and validate the logs fetched from XC console. <br />
 
@@ -55,12 +55,12 @@ In this scenario we are bringing up a https lb with an app type enabling detecti
 
 **Pre-requisites:**<br />
 ---
-1.	Login to F5 XC console and create an `API Certificate` and `API Token`. Please refer this page for the API Certificate and API Token generation: [https://docs.cloud.f5.com/docs/how-to/user-mgmt/credentials](https://docs.cloud.f5.com/docs/how-to/user-mgmt/credentials) <br />
-2.	Move the `API Certificate p12` file to the repository's root directory and update the p12 file name in `user_inputs.json` file <br />
-3.	Update the `API Token` in `user_inputs.json` file
-3.	Create a namespace in XC console, navigate to: `Home->Administration->Personal Management->My Namespaces->Add Namespace` or use `default` namespace and update the namespace name in the `user_inputs.json` file<br />
-4.	Make sure to add delegated domain in XC console and update the domain as well as tenant API url in `user_inputs.json` file. Please follow the steps for domain delegation mentioned in doc: [https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation](https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation) <br />
-6.	Host an application to a server and update the public IP and port of the application server in `user_inputs.json` file <br />
+1.	Login to F5 XC console and create an `API Certificate` and `API Token`. Please refer this page for the API Certificate and API Token generation: [https://docs.cloud.f5.com/docs/how-to/user-mgmt/credentials](https://docs.cloud.f5.com/docs/how-to/user-mgmt/credentials) . <br />
+2.	Move the `API Certificate p12` file to the repository's root directory and update the p12 file name in `user_inputs.json` file. <br />
+3.	Update the `API Token` in `user_inputs.json` file.
+3.	Create a namespace in XC console, navigate to: `Home->Administration->Personal Management->My Namespaces->Add Namespace` or use `default` namespace and update the namespace name in the `user_inputs.json` file. <br />
+4.	Make sure to add delegated domain in XC console and update the domain as well as tenant API url in `user_inputs.json` file. Please follow the steps for domain delegation mentioned in doc: [https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation](https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation) .<br />
+6.	Host an application to a server and update the public IP and port of the application server in `user_inputs.json` file. <br />
 	`Note:` Make sure to double check the IP and port before adding it to `user_inputs.json` file as workflow will fail if incorrect entries are updated.
 
 ```
@@ -84,8 +84,14 @@ Example:
 
 **Steps to run the workflow:**<br />
 ---
-&nbsp;&nbsp;&nbsp;&nbsp;•	Navigate to `Actions` tab in the repository and select the workflow you want to execute <br />
-&nbsp;&nbsp;&nbsp;&nbsp;•	Click on `Run workflow` on the right side of the UI <br /><br />
+&nbsp;&nbsp;&nbsp;&nbsp;•	Navigate to `Actions` tab in the repository and select the workflow you want to execute. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;	`Note:` If `Actions` tab is disabled, follow below images: <br />
+![t5](https://user-images.githubusercontent.com/90624610/205044006-603451d9-fc10-4090-88cb-ba833338fc72.JPG)
+<br /><br />
+![t6](https://user-images.githubusercontent.com/90624610/205044098-27b23344-aa52-4a0f-9c6c-8282a6be0b62.JPG)
+<br />
+
+&nbsp;&nbsp;&nbsp;&nbsp;•	Click on `Run workflow` on the right side of the UI. <br /><br />
 
 **Steps:**<br />
 
@@ -100,4 +106,5 @@ Example:
 **Fetched XC logs in test job:**<br />
 
 ![17](https://user-images.githubusercontent.com/90624610/199406640-93ce319e-fbb2-4973-9b5a-94e5cf91eee7.JPG)
+
 
