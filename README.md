@@ -1,4 +1,4 @@
-# F5® Distributed Cloud Platform malicious user detection and mitigation
+# F5 Distributed Cloud Platform malicious user detection and mitigation
 ***
 
 
@@ -42,59 +42,29 @@ In this scenario we are bringing up a https lb with an app type enabling detecti
 **Pre-requisites:**<br />
 ---
 1.	Login to F5 XC console and create an `API Certificate` and `API Token`. Please refer this page for the API Certificate and API Token generation: [https://docs.cloud.f5.com/docs/how-to/user-mgmt/credentials](https://docs.cloud.f5.com/docs/how-to/user-mgmt/credentials) <br />
-2.	Extract the certificate and the key from the .p12: <br />
-```
-    openssl pkcs12 -info -in certificate.p12 -out private_key.key -nodes -nocerts
-    openssl pkcs12 -info -in certificate.p12 -out certificate.cert -nokeys
-```
-    
-3.	Move the cert and key files to the repository and update the path in `variables.tf` file<br />
-4.	Create a namespace in XC console, navigate to: `Home->Administration->Personal Management->My Namespaces->Add Namespace`or use `default` namespace and update the namespace name to the `variables.tf` file<br />
-5.	Make sure to add delegated domain in XC console and update the domain as well as tenant-name in `variables.tf` file. Please follow the steps for domain delegation mentioned in doc: [https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation](https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation) <br />
-6. 	Update the `test_malicious_user.py` file with APIToken (generated in step-1), tenant name, lb domain (delegated domain) and namespace <br />
-7.	Host an application to a server and update the public IP and port of the application server in `variables.tf` file.  <br />
-	`Note:` Make sure to double check the IP and port before adding it to variables.tf file as workflow will fail if incorrect entries are updated. <br />
+2.	Move the `API Certificate p12` file to the repository's root directory and update the p12 file name in `user_inputs.json` file <br />
+3.	Update the `API Token` in `user_inputs.json` file
+3.	Create a namespace in XC console, navigate to: `Home->Administration->Personal Management->My Namespaces->Add Namespace` or use `default` namespace and update the namespace name in the `user_inputs.json` file<br />
+4.	Make sure to add delegated domain in XC console and update the domain as well as tenant API url in `user_inputs.json` file. Please follow the steps for domain delegation mentioned in doc: [https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation](https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation) <br />
+6.	Host an application to a server and update the public IP and port of the application server in `user_inputs.json` file <br />
+	`Note:` Make sure to double check the IP and port before adding it to `user_inputs.json` file as workflow will fail if incorrect entries are updated.
 
 ```
-path[singlelb] -> http_malicious_user_detection_singlelb/variables.tf
-path[multilb] -> https_malicious_user_detection_multilb/variables.tf
+Example:
 
-<> -> changes needed in variables.tf file
+< > -> changes needed in user_inputs.json file
 
-variable "api_cert" {
-	type = string
-	default = "<path of the uploaded cert file>"
-}
-        
-variable "api_key" {
-  	type = string
-  	default = "<path of the uploaded key file>"
-}
-
-variable "api_url" {
-	type = string
-	default = "https://<tenant-name>.console.ves.volterra.io/api"
+{
+	"api_p12_file": "../<api-creds.p12>",
+	"p12_file_pass": "<password used while creating API Certificate p12 file>",
+	"api_token": "<API token created in Step-1>",
+        "api_url": "https://<your-tenant-name>.console.ves.volterra.io/api",
+        "namespace": "<custom namespace or default>",
+        "domain": "<delegated-domain>",
+        "originip": "<Public IP of hosted application>",
+        "originport": "<Port of hosted application>"	
 }
 
-variable "namespace" {
-	type = string
-	default = "<created namespace or default>"
-}
-
-variable "domain" {
-	type = string
-	default = "<delegated domain>"
-}
-
-variable "originip" {
-	type = string
-	default = "<public IP of the hosted application>"	
-}
-
-variable "originport" {
-	type = string
-	default = "<port of the hosted application>"	
-}
 ```
 <br />
 

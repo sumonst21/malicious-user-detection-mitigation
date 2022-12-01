@@ -1,0 +1,10 @@
+{
+	"api_p12_file": "../api-creds.p12",
+	"p12_file_pass": " ",
+	"api_token": " ",
+        "api_url": " ",
+        "namespace": " ",
+        "domain": " ",
+        "originip": " ",
+        "originport": " "	
+}

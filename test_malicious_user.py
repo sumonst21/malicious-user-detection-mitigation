@@ -11,13 +11,14 @@ from requests.structures import CaseInsensitiveDict
 
 
 # user inputs
-tenant = " "
-ns_name = " "
-token = " "
+user_input = json.load(open('./user_inputs.json', 'r'))
+tenant_api = user_input["api_url"]
+ns_name = user_input["namespace"]
+token = user_input["api_token"]
 headers = CaseInsensitiveDict()
 headers["Accept"] = "application/json"
 headers["Authorization"] = "APIToken " + token
-lb_domain = " "
+lb_domain = user_input["domain"]
 
 
 print(text2art("F5 XC Automation", font="small"))
@@ -93,25 +94,25 @@ def xss_attack():
         time.sleep(1)
 
 
-def fetch_mal_usr_event(tenant, ns_name):
+def fetch_mal_usr_event(tenant_api, ns_name):
     """
     The function will fetch the malicious user event logs from F5 XC console
 
     Parameters:
-    tenant (String): F5 XC tenant name 
+    tenant_api (String): F5 XC tenant api url 
     ns_name (String): Application namespace
 
     Returns:
     json: malicious user event logs
     """
-    url = "https://{0}.console.ves.volterra.io/api/data/namespaces/{1}/app_security/suspicious_user_logs".format(tenant, ns_name)                                                                                                                 
+    url = "{0}/data/namespaces/{1}/app_security/suspicious_user_logs".format(tenant_api, ns_name)                                                                                                                 
     event = requests.post(url, headers=headers)
     return event.json()
 
 
 def mal_user_timeline():
     """ The function will print malicious user detection and mitigation logs """
-    output = fetch_mal_usr_event(tenant, ns_name)
+    output = fetch_mal_usr_event(tenant_api, ns_name)
     print("\n======= F5 XC Malicious user event logs =======\n")
 
     for i in range(len(output['logs'])):
@@ -132,7 +133,7 @@ def main():
         validate_deploy()
     elif sys.argv[1] == "tor":
         # function call to generate tor requests
-        time.sleep(20)
+        time.sleep(10)
         tor_requests()
         time.sleep(30)
         mal_user_timeline()

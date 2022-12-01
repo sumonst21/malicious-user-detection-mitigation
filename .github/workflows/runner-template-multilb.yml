@@ -11,8 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: dcarbone/install-jq-action@v1.0.1
+      - name: Set environment variable
+        run: echo "VES_P12_PASSWORD=$(jq -r .p12_file_pass user_inputs.json)" >> $GITHUB_ENV
       - name: Deploy infra
         run: |
+          cp ./user_inputs.json https_malicious_user_detection_multilb/terraform.tfvars.json
           cd https_malicious_user_detection_multilb
           terraform init
           terraform plan -out=plan.out
@@ -62,8 +66,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: tfstate
+      - name: Set environment variable
+        run: echo "VES_P12_PASSWORD=$(jq -r .p12_file_pass user_inputs.json)" >> $GITHUB_ENV
       - name: Destroy infra
         run: |
+          cp ./user_inputs.json https_malicious_user_detection_multilb/terraform.tfvars.json
           mv ./terraform.tfstate ./https_malicious_user_detection_multilb/
           cd https_malicious_user_detection_multilb
           terraform init

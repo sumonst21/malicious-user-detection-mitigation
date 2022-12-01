@@ -1,34 +1,29 @@
-variable "api_cert" {
-	type = string
-	default = " "
-}
-        
-variable "api_key" {
-  	type = string
-  	default = " "
+variable "api_p12_file" {
+	type = string	
+	default = "../api-cert.p12"
 }
 
 variable "api_url" {
 	type = string
-	default = " "
+	default = "https://your_tenant.console.ves.volterra.io/api"
 }
 
 variable "namespace" {
 	type = string
-	default = " "
+	default = "default"
 }
 
 variable "domain" {
 	type = string
-	default = " "
+	default = ""
 }
 
 variable "originip" {
 	type = string
-	default = " "	
+	default = "127.0.0.1"
 }
 
 variable "originport" {
 	type = string
-	default = " "	
+	default = "80"	
 }
