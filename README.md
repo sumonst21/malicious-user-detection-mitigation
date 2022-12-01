@@ -7,6 +7,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;•	**[Overview](#overview)** <br />
 &nbsp;&nbsp;&nbsp;&nbsp;•	**[Scenarios](#scenarios)** <br />
 &nbsp;&nbsp;&nbsp;&nbsp;•	**[Flow Chart](#flow-chart)** <br />
+&nbsp;&nbsp;&nbsp;&nbsp;•       **[Steps to import the repository](#steps-to-import-the-repository)**<br />
 &nbsp;&nbsp;&nbsp;&nbsp;•	**[Pre-requisites](#pre-requisites)** <br />
 &nbsp;&nbsp;&nbsp;&nbsp;•	**[Steps to run the workflow](#steps-to-run-the-workflow)** <br />
 
@@ -37,6 +38,19 @@ In this scenario we are bringing up a https lb with an app type enabling detecti
 <br />
 
 ![3](https://user-images.githubusercontent.com/90624610/199255655-3b3715bc-06ce-4cb7-b7af-9cbc5f80d676.JPG)
+<br />
+
+
+**Steps to import the repository:**<br />
+---
+![t1](https://user-images.githubusercontent.com/90624610/204997112-2dbbad4d-ff2e-4e55-98f7-9e4b1f6e990a.JPG)
+<br /><br />
+![t2](https://user-images.githubusercontent.com/90624610/204997141-0a166247-a24c-4326-994c-4d43456160c1.JPG)
+<br /><br />
+![t3](https://user-images.githubusercontent.com/90624610/204997162-81dcf88d-7dec-47fc-9e19-8d1e471628c4.JPG)
+<br /><br />
+![t4](https://user-images.githubusercontent.com/90624610/204997187-8d6ba77d-5e35-4ab9-b79c-2db6c0693b3d.JPG)
+<br />
 
 
 **Pre-requisites:**<br />
@@ -66,7 +80,7 @@ Example:
 }
 
 ```
-<br />
+
 
 **Steps to run the workflow:**<br />
 ---
@@ -75,15 +89,14 @@ Example:
 
 **Steps:**<br />
 
-![16](https://user-images.githubusercontent.com/90624610/199281630-a6de141f-7002-4b66-b7de-81fe4add7105.JPG)
+![16](https://user-images.githubusercontent.com/90624610/204998797-77022c51-59d1-4516-bb28-1b6e97d84834.JPG)
 <br />
 
 **Jobs in the workflows:**<br />
 
 ![19](https://user-images.githubusercontent.com/90624610/199423027-c7964d80-89b8-49e9-9a80-6c06d2fab84f.JPG)
+<br />
 
 **Fetched XC logs in test job:**<br />
 
 ![17](https://user-images.githubusercontent.com/90624610/199406640-93ce319e-fbb2-4973-9b5a-94e5cf91eee7.JPG)
-
-
