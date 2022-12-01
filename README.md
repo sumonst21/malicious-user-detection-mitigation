@@ -5,7 +5,7 @@
 **Table of Contents:** <br />
 ---
 &nbsp;&nbsp;&nbsp;&nbsp;•	**[Overview](#overview)** <br />
-&nbsp;&nbsp;&nbsp;&nbsp;•	**[Scenarios](#scenarios)** <br />
+&nbsp;&nbsp;&nbsp;&nbsp;•	**[Workflow Scenarios](#workflow-scenarios)** <br />
 &nbsp;&nbsp;&nbsp;&nbsp;•	**[Flow Chart](#flow-chart)** <br />
 &nbsp;&nbsp;&nbsp;&nbsp;•       **[Steps to import the repository](#steps-to-import-the-repository)**<br />
 &nbsp;&nbsp;&nbsp;&nbsp;•	**[Pre-requisites](#pre-requisites)** <br />
@@ -18,12 +18,13 @@ F5 Distributed Cloud Web Application and API Protection (F5 XC WAAP) offers an A
 [AI/ML detection of Malicious Users using F5 Distributed Cloud WAAP – Part I](https://community.f5.com/t5/technical-articles/ai-ml-detection-of-malicious-users-using-f5-distributed-cloud/ta-p/295052)<br />
 [AI/ML detection of Malicious Users using F5 Distributed Cloud WAAP – Part II](https://community.f5.com/t5/technical-articles/ai-ml-detection-of-malicious-users-using-f5-distributed-cloud/ta-p/296517)<br />
 [AI/ML detection of Malicious Users using F5 Distributed Cloud WAAP – Part III](https://community.f5.com/t5/technical-articles/ai-ml-detection-of-malicious-users-using-f5-distributed-cloud/ta-p/299014)<br /><br />
-This repository consists of two workflows covering demo scenarios for malicious user detection and mitigation using F5 XC WAAP:<br />
+The objective of this automation is to deploy the infrastructure and perform basic testing to demonstrate `malicious user detection and mitigation` feature of F5 XC using `Terraform`, `Python` and `GitHub Actions`.
+This repository consists of two workflows:<br />
 1.	Single LB malicious user detection and default mitigation of high-risk IPs <br />
 2.	Multi LB malicious user detection and custom mitigation of WAF security events <br />
 
 
-**Scenarios:**<br />
+**Workflow Scenarios:**<br />
 ---
 **Single LB malicious user detection and default mitigation of high-risk IPs:**<br />
 In this scenario we are bringing up a http lb and configure it to detect and mitigate malicious user events using default mitigation rule. In second part of this demo, we will generate tor requests and fetch the logs from XC console to validate the detection and mitigation action <br /><br />
@@ -40,7 +41,6 @@ In this scenario we are bringing up a https lb with an app type enabling detecti
 ![3](https://user-images.githubusercontent.com/90624610/199255655-3b3715bc-06ce-4cb7-b7af-9cbc5f80d676.JPG)
 <br />
 
-
 **Steps to import the repository:**<br />
 ---
 ![t1](https://user-images.githubusercontent.com/90624610/204997112-2dbbad4d-ff2e-4e55-98f7-9e4b1f6e990a.JPG)
@@ -50,7 +50,7 @@ In this scenario we are bringing up a https lb with an app type enabling detecti
 ![t3](https://user-images.githubusercontent.com/90624610/204997162-81dcf88d-7dec-47fc-9e19-8d1e471628c4.JPG)
 <br /><br />
 ![t4](https://user-images.githubusercontent.com/90624610/204997187-8d6ba77d-5e35-4ab9-b79c-2db6c0693b3d.JPG)
-<br />
+<br /><br />
 
 
 **Pre-requisites:**<br />
@@ -80,7 +80,7 @@ Example:
 }
 
 ```
-
+<br />
 
 **Steps to run the workflow:**<br />
 ---
@@ -100,3 +100,4 @@ Example:
 **Fetched XC logs in test job:**<br />
 
 ![17](https://user-images.githubusercontent.com/90624610/199406640-93ce319e-fbb2-4973-9b5a-94e5cf91eee7.JPG)
+
